@@ -23,7 +23,12 @@ public class Hippodrome {
             Thread.sleep(200);
         }
     };
-    public void move(){};
+    public void move(){
+        for (Horse horse :
+                horses) {
+            horse.move();
+        }
+    };
     public void print(){};
 
     public static void main(String[] args) {
