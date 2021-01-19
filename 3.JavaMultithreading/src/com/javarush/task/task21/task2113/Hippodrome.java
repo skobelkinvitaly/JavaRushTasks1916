@@ -29,7 +29,15 @@ public class Hippodrome {
             horse.move();
         }
     };
-    public void print(){};
+    public void print(){
+        for (Horse hores :
+                horses) {
+            hores.print();
+        }
+        for (int i = 0; i < 10; i++) {
+            System.out.println();
+        }
+    };
 
     public static void main(String[] args) {
         Hippodrome hippodrome = new Hippodrome(new ArrayList<>());
