@@ -61,10 +61,13 @@ public class Room {
     public void eatMouse() {
         createMouse();
     }
+    public void sleep(){}
 
     public static void main(String[] args) {
         Snake snake = new Snake(1, 5);
         game = new Room(400, 400, snake);
         snake.setDirection(SnakeDirection.DOWN);
+        game.createMouse();
+        game.run();
     }
 }
