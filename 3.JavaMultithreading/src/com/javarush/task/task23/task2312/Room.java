@@ -56,10 +56,11 @@ public class Room {
      * Основной цикл программы.
      * Тут происходят все важные действия
      */
-    public void run() {
+    public void run() throws InterruptedException {
         //Создаем объект "наблюдатель за клавиатурой" и стартуем его.
         KeyboardObserver keyboardObserver = new KeyboardObserver();
         keyboardObserver.start();
+        Thread.sleep(10000);
 
         //пока змея жива
         while (snake.isAlive()) {
@@ -144,13 +145,12 @@ public class Room {
 
     public static Room game;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         game = new Room(20, 20, new Snake(10, 10));
         game.snake.setDirection(SnakeDirection.DOWN);
         game.createMouse();
         game.run();
     }
-
 
     private int initialDelay = 520;
     private int delayStep = 20;
