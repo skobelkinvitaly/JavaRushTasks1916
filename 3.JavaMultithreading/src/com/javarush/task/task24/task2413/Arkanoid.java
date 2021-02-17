@@ -3,6 +3,9 @@ package com.javarush.task.task24.task2413;
 import java.util.List;
 
 public class Arkanoid {
+    public void run(){};
+    public void move(){};
+    static Arkanoid game;
     private Ball ball;
     private Stand stand;
 
