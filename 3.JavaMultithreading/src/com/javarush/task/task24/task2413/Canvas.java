@@ -1,6 +1,23 @@
 package com.javarush.task.task24.task2413;
 
 public class Canvas {
+    void clear() {
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                matrix[i][j] = 0;
+            }
+        }
+    }
+
+    void print(){
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                System.out.print(matrix[i][j]);
+            }
+            System.out.println();
+        }
+    }
+
     void setPoint(double x, double y, char c) {
         int x1 = (int) Math.round(x);
         int y1 = (int) Math.round(y);
