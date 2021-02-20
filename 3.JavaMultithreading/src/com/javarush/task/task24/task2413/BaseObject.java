@@ -11,7 +11,7 @@ public abstract class BaseObject {
         return inter;
     }
 
-    private double x,y, radius;
+    protected double x,y, radius;
 
     public BaseObject(double x, double y, double radius) {
         this.x = x;

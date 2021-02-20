@@ -1,6 +1,7 @@
 package com.javarush.task.task24.task2413;
 
-public class Ball extends BaseObject{
+public class Ball extends BaseObject {
+
     private double dx, dy, direction, speed;
 
     public Ball(double dx, double dy, double speed, double direction) {
@@ -31,17 +32,22 @@ public class Ball extends BaseObject{
     }
 
     private boolean isFrozen;
+
     @Override
     void draw(Canvas canvas) {
-
+        canvas.setPoint(x, y, 'O');
     }
 
     @Override
     void move() {
-
+        if (isFrozen == false) {
+            x = x + dx;
+            y = y + dy;
+        }
     }
 
-//    public Ball(double x, double y) {
-//        super(x, y, 1);
-//    }
+    void start() {
+        isFrozen = false;
+    }
+
 }
