@@ -4,9 +4,7 @@ import com.javarush.task.task36.task3608.bean.User;
 import com.javarush.task.task36.task3608.controller.Controller;
 import com.javarush.task.task36.task3608.model.ModelData;
 
-public class UsersView implements View
-
-{
+public class UsersView implements View {
     private Controller controller;
 
     @Override
@@ -15,8 +13,8 @@ public class UsersView implements View
 //        for (int i = 0; i < modelData.getUsers().size(); i++) {
 //            System.out.println(modelData.getUsers().get(i));
 //        }
-        for (User user :modelData.getUsers()
-                ) {
+        for (User user : modelData.getUsers()
+        ) {
             System.out.println("\t" + user);
         }
         System.out.println("===================================================");
@@ -27,8 +25,12 @@ public class UsersView implements View
         this.controller = controller;
     }
 
-    public void fireEventShowAllUsers(){
+    public void fireEventShowAllUsers() {
         controller.onShowAllUsers();
+    }
+
+    public void fireEventShowDeletedUsers() {
+        controller.onShowAllDeletedUsers();
     }
 
 }
