@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ModelData {
+
     public void setUsers(List<User> users) {
         this.users = users;
     }
