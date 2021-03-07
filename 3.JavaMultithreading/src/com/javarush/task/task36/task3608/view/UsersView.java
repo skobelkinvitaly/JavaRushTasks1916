@@ -9,15 +9,22 @@ public class UsersView implements View {
 
     @Override
     public void refresh(ModelData modelData) {
-        System.out.println("All users:");
-//        for (int i = 0; i < modelData.getUsers().size(); i++) {
-//            System.out.println(modelData.getUsers().get(i));
-//        }
-        for (User user : modelData.getUsers()
-        ) {
-            System.out.println("\t" + user);
+        if (modelData.isDisplayDeletedUserList() == true) {
+            System.out.println("All deleted users:");
+            for (User user : modelData.getUsers()
+            ) {
+                System.out.println("\t" + user);
+            }
+            System.out.println("===================================================");
         }
-        System.out.println("===================================================");
+        else {
+            System.out.println("All users:");
+            for (User user : modelData.getUsers()
+            ) {
+                System.out.println("\t" + user);
+            }
+            System.out.println("===================================================");
+        }
     }
 
     @Override
