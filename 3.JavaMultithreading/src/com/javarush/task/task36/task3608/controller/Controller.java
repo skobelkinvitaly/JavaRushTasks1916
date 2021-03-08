@@ -9,6 +9,14 @@ public class Controller {
     private UsersView usersView;
     private EditUserView editUserView;
 
+    public void onOpenUserEditForm(long userId) {
+//...loadUserById(userId);
+//...refresh(...getModelData());
+//        usersView.
+        model.loadUserById(userId);
+        editUserView.refresh(model.getModelData());
+    }
+
     public void setEditUserView(EditUserView editUserView) {
         this.editUserView = editUserView;
     }

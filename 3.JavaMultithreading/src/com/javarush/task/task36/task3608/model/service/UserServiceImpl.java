@@ -9,6 +9,9 @@ import java.util.List;
 
 public class UserServiceImpl implements UserService {
     private UserDao userDao = new UserDao();
+    private UserServiceImpl userService;
+
+
 
     @Override
     public User deleteUser(long id) {

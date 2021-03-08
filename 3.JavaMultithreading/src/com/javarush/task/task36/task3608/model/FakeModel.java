@@ -28,4 +28,14 @@ public class FakeModel implements Model {
         throw new UnsupportedOperationException();
     }
 
+    @Override
+    public void loadUserById(long id) {
+        throw new UnsupportedOperationException();
+    }
+//
+//    @Override
+//    public void loadUserById() {
+//
+//    }
+
 }

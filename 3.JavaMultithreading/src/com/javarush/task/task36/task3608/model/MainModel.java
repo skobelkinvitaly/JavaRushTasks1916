@@ -11,6 +11,13 @@ public class MainModel implements Model {
     private ModelData modelData = new ModelData();
     private UserService userService = new UserServiceImpl();
 
+
+    public void loadUserById(long userId) {
+        User user = userService.getUsersById(userId);
+//...setActiveUser(user);
+        modelData.setActiveUser(user);
+    }
+
     @Override
     public ModelData getModelData() {
         return modelData;
@@ -28,4 +35,15 @@ public class MainModel implements Model {
         List<User> users = userService.getAllDeletedUsers();
         modelData.setUsers(users);
     }
+//
+//    @Override
+//    public void loadUserById() {
+//
+//    }
+//
+//    @Override
+//    public void loadUserById(long userId) {
+//        User user = userService.getUsersById(userId);
+//        modelData.setActiveUser(user);
+//    }
 }
