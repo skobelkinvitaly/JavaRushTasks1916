@@ -10,9 +10,6 @@ public class Controller {
     private EditUserView editUserView;
 
     public void onOpenUserEditForm(long userId) {
-//...loadUserById(userId);
-//...refresh(...getModelData());
-//        usersView.
         model.loadUserById(userId);
         editUserView.refresh(model.getModelData());
     }
@@ -37,5 +34,9 @@ public class Controller {
 
     public void setModel(Model model) {
         this.model = model;
+    }
+    public void onUserDelete(long id){
+        model.deleteUserById(id);
+        usersView.refresh(model.getModelData());
     }
 }

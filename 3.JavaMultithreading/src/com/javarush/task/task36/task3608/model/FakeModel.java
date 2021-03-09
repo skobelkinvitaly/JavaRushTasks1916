@@ -32,10 +32,11 @@ public class FakeModel implements Model {
     public void loadUserById(long id) {
         throw new UnsupportedOperationException();
     }
-//
-//    @Override
-//    public void loadUserById() {
-//
-//    }
+
+    @Override
+    public void deleteUserById(long id) {
+throw new UnsupportedOperationException();
+    }
+
 
 }
