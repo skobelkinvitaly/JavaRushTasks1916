@@ -6,6 +6,7 @@ import com.javarush.engine.cell.Color;
 import java.awt.*;
 
 public class RacerGame extends Game {
+    private RoadMarking roadMarking;
     public static final int WIDTH = 64;
     public static final int HEIGHT = 64;
     public static final int CENTER_X = WIDTH / 2;
@@ -24,6 +25,7 @@ public class RacerGame extends Game {
     }
 
     private void createGame() {
+        roadMarking = new RoadMarking();
         drawScene();
     }
 
@@ -35,7 +37,9 @@ public class RacerGame extends Game {
     ;
 
     private void drawScene() {
+
         drawField();
+        roadMarking.draw(this);
     }
 
     ;
