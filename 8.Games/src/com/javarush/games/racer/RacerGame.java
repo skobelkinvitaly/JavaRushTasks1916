@@ -3,14 +3,25 @@ package com.javarush.games.racer;
 import com.javarush.engine.cell.*;
 import com.javarush.engine.cell.Color;
 
-import java.awt.*;
-
 public class RacerGame extends Game {
+    private PlayerCar player;
     private RoadMarking roadMarking;
     public static final int WIDTH = 64;
     public static final int HEIGHT = 64;
     public static final int CENTER_X = WIDTH / 2;
     public static final int ROADSIDE_WIDTH = 14;
+
+    private void moveAll(){
+        roadMarking.move(player.speed);
+    }
+
+    @Override
+    public void onTurn(int step) {
+//        super.onTurn(step);
+        moveAll();
+        drawScene();
+
+    }
 
     private void drawField() {
         for (int x = 0; x < WIDTH; x++) {
@@ -26,7 +37,9 @@ public class RacerGame extends Game {
 
     private void createGame() {
         roadMarking = new RoadMarking();
+        player = new PlayerCar();
         drawScene();
+        setTurnTimer(40);
     }
 
     @Override
@@ -40,6 +53,7 @@ public class RacerGame extends Game {
 
         drawField();
         roadMarking.draw(this);
+        player.draw(this);
     }
 
     ;
