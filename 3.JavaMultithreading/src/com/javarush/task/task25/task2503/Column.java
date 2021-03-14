@@ -1,9 +1,10 @@
 package com.javarush.task.task25.task2503;
 
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-public enum Column implements Columnable{
+public enum Column implements Columnable {
     Customer("Customer"),
     BankName("Bank Name"),
     AccountNumber("Account Number"),
@@ -50,7 +51,15 @@ public enum Column implements Columnable{
      */
     public static List<Column> getVisibleColumns() {
         List<Column> result = new LinkedList<>();
-
+        for (int i = 0; i < values().length; i++) {
+            result.add(null);
+        }
+        for (int i = 0; i < values().length; i++) {
+            if (realOrder[i] == -1) continue;
+            Column[] array = Column.values();
+            result.set(realOrder[i], array[i]);
+        }
+        result.removeAll(Collections.singleton(null));
         return result;
     }
 
@@ -61,12 +70,12 @@ public enum Column implements Columnable{
 
     @Override
     public boolean isShown() {
-        if (realOrder[])
-        return false;
+        if (realOrder[ordinal()] >=0) return true;
+        else return  false;
     }
 
     @Override
     public void hide() {
-//if (this.isShown() == false)
+    realOrder[ordinal()] = -1;
     }
 }
