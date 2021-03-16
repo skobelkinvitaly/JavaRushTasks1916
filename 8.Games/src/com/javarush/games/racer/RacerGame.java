@@ -12,6 +12,14 @@ public class RacerGame extends Game {
     public static final int ROADSIDE_WIDTH = 14;
 
     @Override
+    public void onKeyReleased(Key key) {
+//        super.onKeyReleased(key);
+        if (key == Key.RIGHT && player.getDirection() == Direction.RIGHT) player.setDirection(Direction.NONE);
+        if (key == Key.LEFT && player.getDirection() == Direction.LEFT) player.setDirection(Direction.NONE);
+
+    }
+
+    @Override
     public void onKeyPress(Key key) {
 //        super.onKeyPress(key);
         if (key == Key.RIGHT) player.setDirection(Direction.RIGHT);
