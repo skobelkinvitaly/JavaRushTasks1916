@@ -39,4 +39,23 @@ public class RoadManager {
             items.get(i).move(items.get(i).speed + boost);
         }
     }
+    private boolean isThornExists(){
+//        if (items.contains(RoadObjectType.THORN)) return true;
+//        else return false;
+        boolean flag = false;
+        for (int i = 0; i < items.size(); i++) {
+            if (items.get(i) instanceof Thorn) {
+                return true;
+            }
+        }
+        return  false;
+    }
+    private void generateThorn(Game game){
+       int num =  game.getRandomNumber(100);
+        if (num < 10 && isThornExists() == false) addRoadObject(RoadObjectType.THORN, game);
+    }
+    public void generateNewRoadObjects(Game game){
+        generateThorn(game);
+
+    }
 }

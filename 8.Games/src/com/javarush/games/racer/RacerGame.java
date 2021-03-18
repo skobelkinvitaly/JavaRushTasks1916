@@ -27,15 +27,16 @@ public class RacerGame extends Game {
         if (key == Key.LEFT) player.setDirection(Direction.LEFT);
     }
 
-    private void moveAll(){
+    private void moveAll() {
         roadMarking.move(player.speed);
         player.move();
+        roadManager.move(player.speed);
     }
 
     @Override
     public void onTurn(int step) {
-//        super.onTurn(step);
         moveAll();
+        roadManager.generateNewRoadObjects(this);
         drawScene();
 
     }
@@ -45,9 +46,9 @@ public class RacerGame extends Game {
             for (int y = 0; y < HEIGHT; y++) {
                 if (x == CENTER_X) {
                     setCellColor(CENTER_X, y, Color.WHITE);
-                }else if (x >= ROADSIDE_WIDTH && x < (WIDTH - ROADSIDE_WIDTH)) {
+                } else if (x >= ROADSIDE_WIDTH && x < (WIDTH - ROADSIDE_WIDTH)) {
                     setCellColor(x, y, Color.DIMGREY);
-                }else setCellColor(x,y,Color.GREEN);
+                } else setCellColor(x, y, Color.GREEN);
             }
         }
     }
@@ -62,7 +63,7 @@ public class RacerGame extends Game {
 
     @Override
     public void setCellColor(int x, int y, Color color) {
-        if (x >= 0 && x<WIDTH && y>=0 && y<HEIGHT)        super.setCellColor(x, y, color);
+        if (x >= 0 && x < WIDTH && y >= 0 && y < HEIGHT) super.setCellColor(x, y, color);
     }
 
     ;
