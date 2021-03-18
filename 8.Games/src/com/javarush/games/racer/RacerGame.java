@@ -2,10 +2,12 @@ package com.javarush.games.racer;
 
 import com.javarush.engine.cell.*;
 import com.javarush.engine.cell.Color;
+import com.javarush.games.racer.road.RoadManager;
 
 public class RacerGame extends Game {
     private PlayerCar player;
     private RoadMarking roadMarking;
+    private RoadManager roadManager;
     public static final int WIDTH = 64;
     public static final int HEIGHT = 64;
     public static final int CENTER_X = WIDTH / 2;
@@ -13,7 +15,6 @@ public class RacerGame extends Game {
 
     @Override
     public void onKeyReleased(Key key) {
-//        super.onKeyReleased(key);
         if (key == Key.RIGHT && player.getDirection() == Direction.RIGHT) player.setDirection(Direction.NONE);
         if (key == Key.LEFT && player.getDirection() == Direction.LEFT) player.setDirection(Direction.NONE);
 
@@ -54,6 +55,7 @@ public class RacerGame extends Game {
     private void createGame() {
         roadMarking = new RoadMarking();
         player = new PlayerCar();
+        roadManager = new RoadManager();
         drawScene();
         setTurnTimer(40);
     }
@@ -70,6 +72,7 @@ public class RacerGame extends Game {
         drawField();
         roadMarking.draw(this);
         player.draw(this);
+        roadManager.draw(this);
     }
 
     ;
