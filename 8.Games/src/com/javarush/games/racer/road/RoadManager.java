@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RoadManager {
+    private static final int PLAYER_CAR_DISTANCE = 12;
     public final static int LEFT_BORDER = RacerGame.ROADSIDE_WIDTH;
     public final static int RIGHT_BORDER = RacerGame.WIDTH - LEFT_BORDER;
     private final static int FIRST_LANE_POSITION = 16;
@@ -28,7 +29,9 @@ public class RoadManager {
         int x = game.getRandomNumber(FIRST_LANE_POSITION, FOURTH_LANE_POSITION);
         int y = -1 * RoadObject.getHeight(roadObjectType);
         RoadObject obj = createRoadObject(roadObjectType, x, y);
-        if (obj != null) items.add(obj);
+//        if (obj != null) items.add(obj);
+boolean b = isRoadSpaceFree(obj);
+        if( b== true) items.add(obj);
     }
 
     public void draw(Game game) {
@@ -86,5 +89,11 @@ public class RoadManager {
     private void generateRegularCar(Game game) {
         int carTypeNumber = game.getRandomNumber(4);
         if (game.getRandomNumber(100) < 30) addRoadObject(RoadObjectType.values()[carTypeNumber], game);
+    }
+    private boolean isRoadSpaceFree(RoadObject object){
+        for (int i = 0; i < items.size(); i++) {
+            if (items.get(i).isCollisionWithDistance(object, PLAYER_CAR_DISTANCE) == true) return false;
+        }
+        return  true;
     }
 }
