@@ -18,13 +18,15 @@ public class RacerGame extends Game {
     public void onKeyReleased(Key key) {
         if (key == Key.RIGHT && player.getDirection() == Direction.RIGHT) player.setDirection(Direction.NONE);
         if (key == Key.LEFT && player.getDirection() == Direction.LEFT) player.setDirection(Direction.NONE);
-
+        if (key == Key.UP) player.speed = 1;
     }
 
     @Override
     public void onKeyPress(Key key) {
         if (key == Key.RIGHT) player.setDirection(Direction.RIGHT);
         if (key == Key.LEFT) player.setDirection(Direction.LEFT);
+        if (key == Key.UP) player.speed = 2;
+        if (key == Key.SPACE && isGameStopped == true) createGame();
     }
 
     private void moveAll() {
@@ -39,7 +41,7 @@ public class RacerGame extends Game {
         ret = roadManager.checkCrush(player);
         if (ret == true) {
             gameOver();
-        }else {
+        } else {
             moveAll();
             roadManager.generateNewRoadObjects(this);
         }
@@ -99,8 +101,9 @@ public class RacerGame extends Game {
         racerGame.initialize();
 
     }
-    private void gameOver(){
-        showMessageDialog(Color.AZURE, "Game Over", Color.BLACK, 100 );
+
+    private void gameOver() {
+        showMessageDialog(Color.AZURE, "Game Over", Color.BLACK, 100);
         stopTurnTimer();
         player.stop();
         isGameStopped = true;
