@@ -26,4 +26,7 @@ if (this.x > RoadManager.RIGHT_BORDER) x = RoadManager.RIGHT_BORDER - width;
     public PlayerCar() {
         super(RacerGame.WIDTH / 2 + 2, RacerGame.HEIGHT - playerCarHeight - 1, ShapeMatrix.PLAYER);
     }
+    public void stop(){
+        matrix = ShapeMatrix.PLAYER_DEAD;
+    }
 }

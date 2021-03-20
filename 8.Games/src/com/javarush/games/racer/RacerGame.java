@@ -5,6 +5,7 @@ import com.javarush.engine.cell.Color;
 import com.javarush.games.racer.road.RoadManager;
 
 public class RacerGame extends Game {
+    private boolean isGameStopped;
     private PlayerCar player;
     private RoadMarking roadMarking;
     private RoadManager roadManager;
@@ -22,7 +23,6 @@ public class RacerGame extends Game {
 
     @Override
     public void onKeyPress(Key key) {
-//        super.onKeyPress(key);
         if (key == Key.RIGHT) player.setDirection(Direction.RIGHT);
         if (key == Key.LEFT) player.setDirection(Direction.LEFT);
     }
@@ -35,8 +35,14 @@ public class RacerGame extends Game {
 
     @Override
     public void onTurn(int step) {
-        moveAll();
-        roadManager.generateNewRoadObjects(this);
+        boolean ret;
+        ret = roadManager.checkCrush(player);
+        if (ret == true) {
+            gameOver();
+        }else {
+            moveAll();
+            roadManager.generateNewRoadObjects(this);
+        }
         drawScene();
 
     }
@@ -59,6 +65,7 @@ public class RacerGame extends Game {
         roadManager = new RoadManager();
         drawScene();
         setTurnTimer(40);
+        isGameStopped = false;
     }
 
     @Override
@@ -91,5 +98,11 @@ public class RacerGame extends Game {
         RacerGame racerGame = new RacerGame();
         racerGame.initialize();
 
+    }
+    private void gameOver(){
+        showMessageDialog(Color.AZURE, "Game Over", Color.BLACK, 100 );
+        stopTurnTimer();
+        player.stop();
+        isGameStopped = true;
     }
 }
