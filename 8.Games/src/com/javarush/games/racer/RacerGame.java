@@ -45,6 +45,7 @@ public class RacerGame extends Game {
         if (ret == true) {
             gameOver();
         } else {
+            if (roadManager.getPassedCarsCount() >= RACE_GOAL_CARS_COUNT) finishLine.show();
             moveAll();
             roadManager.generateNewRoadObjects(this);
         }

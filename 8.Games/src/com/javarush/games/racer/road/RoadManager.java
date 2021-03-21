@@ -8,6 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RoadManager {
+    public int getPassedCarsCount() {
+        return passedCarsCount;
+    }
+
+    private int passedCarsCount = 0;
     private static final int PLAYER_CAR_DISTANCE = 12;
     public final static int LEFT_BORDER = RacerGame.ROADSIDE_WIDTH;
     public final static int RIGHT_BORDER = RacerGame.WIDTH - LEFT_BORDER;
@@ -72,7 +77,10 @@ boolean b = isRoadSpaceFree(obj);
         List<RoadObject> itemsCopy = new ArrayList<>(items);
         for (RoadObject item :
                 itemsCopy) {
-            if (item.y >= RacerGame.HEIGHT) items.remove(item);
+            if (item.y >= RacerGame.HEIGHT) {
+                items.remove(item);
+                if (!(item instanceof Thorn)) passedCarsCount++;
+            }
         }
     }
 
