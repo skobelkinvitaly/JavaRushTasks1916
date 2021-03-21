@@ -5,6 +5,7 @@ import com.javarush.engine.cell.Color;
 import com.javarush.games.racer.road.RoadManager;
 
 public class RacerGame extends Game {
+    private FinishLine finishLine;
     private boolean isGameStopped;
     private PlayerCar player;
     private RoadMarking roadMarking;
@@ -13,6 +14,7 @@ public class RacerGame extends Game {
     public static final int HEIGHT = 64;
     public static final int CENTER_X = WIDTH / 2;
     public static final int ROADSIDE_WIDTH = 14;
+    private static final int RACE_GOAL_CARS_COUNT= 40;
 
     @Override
     public void onKeyReleased(Key key) {
@@ -33,6 +35,7 @@ public class RacerGame extends Game {
         roadMarking.move(player.speed);
         player.move();
         roadManager.move(player.speed);
+        finishLine.move(player.speed);
     }
 
     @Override
@@ -65,6 +68,7 @@ public class RacerGame extends Game {
         roadMarking = new RoadMarking();
         player = new PlayerCar();
         roadManager = new RoadManager();
+        finishLine = new FinishLine();
         drawScene();
         setTurnTimer(40);
         isGameStopped = false;
@@ -80,6 +84,7 @@ public class RacerGame extends Game {
     private void drawScene() {
 
         drawField();
+        finishLine.draw(this);
         roadMarking.draw(this);
         player.draw(this);
         roadManager.draw(this);
