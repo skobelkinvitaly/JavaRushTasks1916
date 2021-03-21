@@ -20,16 +20,16 @@ public class RoadManager {
 
         if (type.equals(RoadObjectType.THORN)) {
             return new Thorn(x, y);
-        } else return new Car(type, x, y);
-//        if (!type.equals())
-//        return null;
+        } else {
+            if (type.equals(RoadObjectType.DRUNK_CAR)) return new MovingCar(x,y);
+            return new Car(type, x, y);
+        }
     }
 
     private void addRoadObject(RoadObjectType roadObjectType, Game game) {
         int x = game.getRandomNumber(FIRST_LANE_POSITION, FOURTH_LANE_POSITION);
         int y = -1 * RoadObject.getHeight(roadObjectType);
         RoadObject obj = createRoadObject(roadObjectType, x, y);
-//        if (obj != null) items.add(obj);
 boolean b = isRoadSpaceFree(obj);
         if( b== true) items.add(obj);
     }
@@ -42,7 +42,7 @@ boolean b = isRoadSpaceFree(obj);
 
     public void move(int boost) {
         for (int i = 0; i < items.size(); i++) {
-            items.get(i).move(items.get(i).speed + boost);
+            items.get(i).move(items.get(i).speed + boost, items);
         }
         deletePassedItems();
     }
@@ -65,6 +65,7 @@ boolean b = isRoadSpaceFree(obj);
     public void generateNewRoadObjects(Game game) {
         generateThorn(game);
         generateRegularCar(game);
+        generateMovingCar(game);
     }
 
     private void deletePassedItems() {
@@ -95,5 +96,14 @@ boolean b = isRoadSpaceFree(obj);
             if (items.get(i).isCollisionWithDistance(object, PLAYER_CAR_DISTANCE) == true) return false;
         }
         return  true;
+    }
+    private boolean isMovingCarExists(){
+        for (int i = 0; i < items.size(); i++) {
+            if (items.get(i) instanceof  MovingCar) return true;
+        }
+        return false;
+    }
+    private void generateMovingCar(Game game){
+        if (game.getRandomNumber(100) < 10 && isMovingCarExists() == false) addRoadObject(RoadObjectType.DRUNK_CAR, game);
     }
 }
