@@ -5,6 +5,7 @@ import com.javarush.engine.cell.Color;
 import com.javarush.games.racer.road.RoadManager;
 
 public class RacerGame extends Game {
+    private ProgressBar progressBar;
     private FinishLine finishLine;
     private boolean isGameStopped;
     private PlayerCar player;
@@ -36,6 +37,7 @@ public class RacerGame extends Game {
         player.move();
         roadManager.move(player.speed);
         finishLine.move(player.speed);
+        progressBar.move(roadManager.getPassedCarsCount());
     }
 
     @Override
@@ -70,6 +72,7 @@ public class RacerGame extends Game {
         player = new PlayerCar();
         roadManager = new RoadManager();
         finishLine = new FinishLine();
+        progressBar = new ProgressBar(RACE_GOAL_CARS_COUNT);
         drawScene();
         setTurnTimer(40);
         isGameStopped = false;
@@ -85,6 +88,7 @@ public class RacerGame extends Game {
     private void drawScene() {
 
         drawField();
+        progressBar.draw(this);
         finishLine.draw(this);
         roadMarking.draw(this);
         player.draw(this);
