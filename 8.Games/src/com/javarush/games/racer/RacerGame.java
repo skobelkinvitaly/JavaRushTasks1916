@@ -5,6 +5,7 @@ import com.javarush.engine.cell.Color;
 import com.javarush.games.racer.road.RoadManager;
 
 public class RacerGame extends Game {
+    private int score;
     private ProgressBar progressBar;
     private FinishLine finishLine;
     private boolean isGameStopped;
@@ -42,6 +43,8 @@ public class RacerGame extends Game {
 
     @Override
     public void onTurn(int step) {
+        score = score - 5;
+        setScore(score);
         boolean ret;
         ret = roadManager.checkCrush(player);
         if (ret == true) {
@@ -54,6 +57,7 @@ public class RacerGame extends Game {
             } else {
                 roadManager.generateNewRoadObjects(this);
                 moveAll();
+                drawScene();
             }
         }
     }
@@ -71,6 +75,7 @@ public class RacerGame extends Game {
     }
 
     private void createGame() {
+        score = 3500;
         roadMarking = new RoadMarking();
         player = new PlayerCar();
         roadManager = new RoadManager();
