@@ -10,5 +10,15 @@ public class SpaceInvadersGame extends Game {
     public void initialize() {
 //        super.initialize();
         setScreenSize(WIDTH, HEIGHT);
+        createGame();
+    }
+    private void createGame(){
+        drawScene();
+    }
+    private void drawScene(){
+        drawField();
+    }
+    private void drawField(){
+
     }
 }
