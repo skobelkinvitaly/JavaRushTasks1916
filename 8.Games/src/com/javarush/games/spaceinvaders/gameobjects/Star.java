@@ -1,7 +1,17 @@
 package com.javarush.games.spaceinvaders.gameobjects;
 
+//import com.javarush.engine.cell.Color;
+import com.javarush.engine.cell.*;
+
+import java.util.ArrayList;
+
 public class Star extends GameObject {
+    private static final String STAR_SIGN = "\u2605";
     public Star(double x, double y) {
         super(x, y);
     }
+    public void draw(Game game){
+        game.setCellValueEx( (int)x, (int)y, Color.NONE, STAR_SIGN, Color.RED, 100);
+    }
+
 }
