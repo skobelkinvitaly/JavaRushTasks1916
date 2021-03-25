@@ -43,23 +43,46 @@ public class RacerGame extends Game {
 
     @Override
     public void onTurn(int step) {
-        score = score - 5;
-        setScore(score);
-        boolean ret;
-        ret = roadManager.checkCrush(player);
-        if (ret == true) {
+        if (roadManager.checkCrush(player)){
             gameOver();
-        } else {
-            if (roadManager.getPassedCarsCount() >= RACE_GOAL_CARS_COUNT) finishLine.show();
-            if (finishLine.isCrossed(player) == true) {
-                win();
-                drawScene();
-            } else {
-                roadManager.generateNewRoadObjects(this);
-                moveAll();
-                drawScene();
-            }
+            drawScene();
+            return;
         }
+        roadManager.generateNewRoadObjects(this);
+        if (roadManager.getPassedCarsCount()>= RACE_GOAL_CARS_COUNT) {
+            finishLine.show();
+        }
+        if (finishLine.isCrossed(player)){
+            win();
+            drawScene();
+            return;
+        }
+        moveAll();
+        score -=5;
+        setScore(score);
+        drawScene();
+//        boolean ret;
+//        ret = roadManager.checkCrush(player);
+//        if (ret == true) {
+//            gameOver();
+//            return;
+//        }
+//        roadManager.generateNewRoadObjects(this);
+////        else {
+//        if (roadManager.getPassedCarsCount() >= RACE_GOAL_CARS_COUNT) finishLine.show();
+//        if (finishLine.isCrossed(player) == true) {
+//            win();
+//            drawScene();
+//            return;
+//        }
+////            else {
+//        moveAll();
+//        score = score - 5;
+////        setScore(score);
+//        setScore(score);
+//        drawScene();
+////            }
+////        }
     }
 
     private void drawField() {
