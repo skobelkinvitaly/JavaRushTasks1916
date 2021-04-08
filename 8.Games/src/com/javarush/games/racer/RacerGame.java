@@ -61,28 +61,6 @@ public class RacerGame extends Game {
         score -=5;
         setScore(score);
         drawScene();
-//        boolean ret;
-//        ret = roadManager.checkCrush(player);
-//        if (ret == true) {
-//            gameOver();
-//            return;
-//        }
-//        roadManager.generateNewRoadObjects(this);
-////        else {
-//        if (roadManager.getPassedCarsCount() >= RACE_GOAL_CARS_COUNT) finishLine.show();
-//        if (finishLine.isCrossed(player) == true) {
-//            win();
-//            drawScene();
-//            return;
-//        }
-////            else {
-//        moveAll();
-//        score = score - 5;
-////        setScore(score);
-//        setScore(score);
-//        drawScene();
-////            }
-////        }
     }
 
     private void drawField() {
