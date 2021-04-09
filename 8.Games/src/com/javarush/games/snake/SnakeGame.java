@@ -14,7 +14,9 @@ public class SnakeGame extends Game {
     }
     //метод выполняет действия для создания игры
     private void  createGame(){
+        Apple apple = new Apple(7,7);//создаем яблоко
         drawScene();
+        apple.draw(this);//отрисовка яблока
     }
     //метод выполняет отрисовку экрана
     private void  drawScene(){
