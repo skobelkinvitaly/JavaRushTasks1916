@@ -49,4 +49,9 @@ public class Snake {
             }
         }
     }
+    //Логика передвижения змейки
+    public  void move(){
+
+    }
+
 }
