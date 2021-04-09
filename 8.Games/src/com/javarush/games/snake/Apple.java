@@ -3,6 +3,7 @@ package com.javarush.games.snake;
 import com.javarush.engine.cell.*;
 
 public class Apple extends GameObject {
+    public boolean isAlive = true;
     private final static String APPLE_SIGN = "\uD83C\uDF4E"; //знак яблока
     public Apple(int x, int y) {
         super(x, y);
