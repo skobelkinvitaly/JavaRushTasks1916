@@ -10,5 +10,19 @@ public class SnakeGame extends Game {
     public void initialize() {
         //устанавливаем размеры игрового поля
         setScreenSize(WIDTH, HEIGHT);
+        createGame();
+    }
+    //метод выполняет действия для создания игры
+    private void  createGame(){
+        drawScene();
+    }
+    //метод выполняет отрисовку экрана
+    private void  drawScene(){
+        //Окраска ячеек игрового поля
+        for (int x = 0; x < WIDTH; x++) {
+            for (int y = 0; y < HEIGHT; y++) {
+                setCellColor(x, y, Color.DARKSEAGREEN);
+            }
+        }
     }
 }
