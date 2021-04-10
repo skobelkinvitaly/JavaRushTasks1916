@@ -21,7 +21,8 @@ public class SnakeGame extends Game {
         setTurnTimer(turnDelay);
         Snake snakeT = new Snake(WIDTH/2, HEIGHT/2);
         snake = snakeT;
-        Apple apple = new Apple(5,5);//создаем яблоко
+//        Apple apple = new Apple(5,5);//создаем яблоко
+        createNewApple();
         drawScene();
 //        apple.draw(this);//отрисовка яблока
     }
@@ -44,6 +45,7 @@ public class SnakeGame extends Game {
 //        super.onTurn(step);
 //        snake.move();
         snake.move(apple);
+        if (apple.isAlive == false) createNewApple();
         drawScene();
     }
 
@@ -54,5 +56,11 @@ public class SnakeGame extends Game {
         if (key == Key.RIGHT) snake.setDirection(Direction.RIGHT);
         if (key == Key.UP) snake.setDirection(Direction.UP);
         if (key == Key.DOWN) snake.setDirection(Direction.DOWN);
+    }
+    private void createNewApple(){
+        int x = getRandomNumber(WIDTH);
+        int y = getRandomNumber(HEIGHT);
+        Apple newApple = new Apple(x, y);
+        apple = newApple;
     }
 }
