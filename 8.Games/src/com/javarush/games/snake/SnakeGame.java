@@ -3,6 +3,7 @@ package com.javarush.games.snake;
 import com.javarush.engine.cell.*;
 
 public class SnakeGame extends Game {
+    private Apple apple;
     private   int turnDelay; //Переменная установки продолжительности хода
     public static final int WIDTH = 15;
     public static final int HEIGHT = 15;
@@ -18,9 +19,9 @@ public class SnakeGame extends Game {
     private void  createGame(){
         turnDelay = 300;
         setTurnTimer(turnDelay);
-//        Apple apple = new Apple(7,7);//создаем яблоко
         Snake snakeT = new Snake(WIDTH/2, HEIGHT/2);
         snake = snakeT;
+        Apple apple = new Apple(5,5);//создаем яблоко
         drawScene();
 //        apple.draw(this);//отрисовка яблока
     }
@@ -34,13 +35,15 @@ public class SnakeGame extends Game {
             }
         }
         snake.draw(this); //отрисовка змеи
+        apple.draw(this);
     }
 //Всё, что должно происходить в игре на протяжении одного хода, описывается здесь.
 // После передвижения змейки не забудь перерисовать игровое поле.
     @Override
     public void onTurn(int step) {
 //        super.onTurn(step);
-        snake.move();
+//        snake.move();
+        snake.move(apple);
         drawScene();
     }
 

@@ -54,13 +54,27 @@ if (this.direction == Direction.DOWN && direction != Direction.UP) this.directio
     }
 
     //Логика передвижения змейки
-    public void move() {
+//    public void move() {
+//        GameObject newHead = createNewHead();
+//        if (newHead.x < 0 || newHead.x >= SnakeGame.WIDTH || newHead.y < 0 ||
+//                newHead.y >= SnakeGame.HEIGHT) isAlive = false;
+//        else {
+//            snakeParts.add(0, newHead);
+//            removeTail();
+//        }
+//    }
+//
+    public void move(Apple apple) {
+        GameObject head = snakeParts.get(0);
         GameObject newHead = createNewHead();
         if (newHead.x < 0 || newHead.x >= SnakeGame.WIDTH || newHead.y < 0 ||
                 newHead.y >= SnakeGame.HEIGHT) isAlive = false;
         else {
             snakeParts.add(0, newHead);
-            removeTail();
+//            removeTail();
+            if (apple.x == newHead.x && apple.y == newHead.y) {
+                apple.isAlive = false;
+            } else removeTail();
         }
     }
 
