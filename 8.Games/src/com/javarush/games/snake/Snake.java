@@ -52,7 +52,13 @@ public class Snake {
 
     //Логика передвижения змейки
     public void move() {
-
+        GameObject newHead = createNewHead();
+        if (newHead.x < 0 || newHead.x >= SnakeGame.WIDTH || newHead.y < 0 ||
+                newHead.y >= SnakeGame.HEIGHT) isAlive = false;
+        else {
+            snakeParts.add(0, newHead);
+            removeTail();
+        }
     }
 
     //Создаётся новая голова
@@ -64,7 +70,8 @@ public class Snake {
         if (direction == Direction.DOWN) return new GameObject(headX, headY + 1);
         return new GameObject(headX, headY - 1);
     }
-//Удаление хвоста при создании головы
+
+    //Удаление хвоста при создании головы
     public void removeTail() {
         snakeParts.remove(snakeParts.size() - 1);
     }

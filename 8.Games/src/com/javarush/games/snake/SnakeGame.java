@@ -29,7 +29,8 @@ public class SnakeGame extends Game {
         //Окраска ячеек игрового поля
         for (int x = 0; x < WIDTH; x++) {
             for (int y = 0; y < HEIGHT; y++) {
-                setCellColor(x, y, Color.DARKSEAGREEN);
+//                setCellColor(x, y, Color.DARKSEAGREEN);
+                setCellValueEx(x,y,Color.DARKSEAGREEN, "");
             }
         }
         snake.draw(this); //отрисовка змеи
