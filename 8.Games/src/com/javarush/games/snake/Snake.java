@@ -10,7 +10,10 @@ public class Snake {
 
     //Устанавливает направление
     public void setDirection(Direction direction) {
-        this.direction = direction;
+if (this.direction == Direction.RIGHT && direction != Direction.LEFT) this.direction = direction;
+if (this.direction == Direction.LEFT && direction != Direction.RIGHT) this.direction = direction;
+if (this.direction == Direction.UP && direction != Direction.DOWN) this.direction = direction;
+if (this.direction == Direction.DOWN && direction != Direction.UP) this.direction = direction;
     }
 
     public boolean isAlive = true;
