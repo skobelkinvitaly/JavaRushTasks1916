@@ -70,11 +70,14 @@ if (this.direction == Direction.DOWN && direction != Direction.UP) this.directio
         if (newHead.x < 0 || newHead.x >= SnakeGame.WIDTH || newHead.y < 0 ||
                 newHead.y >= SnakeGame.HEIGHT) isAlive = false;
         else {
-            snakeParts.add(0, newHead);
+            if (checkCollision(newHead)) isAlive = false;
+            else {
+                snakeParts.add(0, newHead);
 //            removeTail();
-            if (apple.x == newHead.x && apple.y == newHead.y) {
-                apple.isAlive = false;
-            } else removeTail();
+                if (apple.x == newHead.x && apple.y == newHead.y) {
+                    apple.isAlive = false;
+                } else removeTail();
+            }
         }
     }
 
@@ -91,5 +94,17 @@ if (this.direction == Direction.DOWN && direction != Direction.UP) this.directio
     //Удаление хвоста при создании головы
     public void removeTail() {
         snakeParts.remove(snakeParts.size() - 1);
+    }
+    //Проверка пересечения змейки с собой
+    public boolean checkCollision(GameObject gameObject){
+        boolean ret = false;
+        for (GameObject gameObjectTemp:snakeParts) {
+            if (gameObject.x == gameObjectTemp.x &&
+                    gameObject.y == gameObjectTemp.y) {
+                ret = true;
+                break;
+            }
+        }
+        return ret;
     }
 }
