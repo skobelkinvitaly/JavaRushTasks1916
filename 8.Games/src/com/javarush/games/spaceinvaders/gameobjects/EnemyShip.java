@@ -19,7 +19,7 @@ public class EnemyShip extends Ship{
     public void kill() {
         if(this.isAlive) {
             isAlive = false;
-        setAnimatedView(false, ShapeMatrix.KILL_ENEMY_ANIMATION_FIRST, ShapeMatrix.KILL_ENEMY_ANIMATION_SECOND,
+        setAnimatedView(true, ShapeMatrix.KILL_ENEMY_ANIMATION_FIRST, ShapeMatrix.KILL_ENEMY_ANIMATION_SECOND,
                 ShapeMatrix.KILL_ENEMY_ANIMATION_THIRD);
         }
     }

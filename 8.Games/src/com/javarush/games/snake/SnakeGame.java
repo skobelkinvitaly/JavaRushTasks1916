@@ -3,6 +3,7 @@ package com.javarush.games.snake;
 import com.javarush.engine.cell.*;
 
 public class SnakeGame extends Game {
+    private static final int  GOAL = 28;
     private boolean isGameStopped;
     private Apple apple;
     private   int turnDelay; //Переменная установки продолжительности хода
@@ -49,6 +50,7 @@ public class SnakeGame extends Game {
         snake.move(apple);
         if (apple.isAlive == false) createNewApple();
         if (snake.isAlive == false) gameOver();
+        if (snake.getLength() > GOAL) win();
         drawScene();
     }
 
@@ -70,5 +72,10 @@ public class SnakeGame extends Game {
         stopTurnTimer();
         isGameStopped = true;
         showMessageDialog(Color.AZURE, "GAME OVER", Color.BLACK, 15);
+    }
+    private void win(){
+        stopTurnTimer();
+        isGameStopped = true;
+        showMessageDialog(Color.GREEN, "YOU WIN!!!", Color.BLANCHEDALMOND, 50);
     }
 }

@@ -107,4 +107,7 @@ if (this.direction == Direction.DOWN && direction != Direction.UP) this.directio
         }
         return ret;
     }
+    public int getLength(){
+        return snakeParts.size();
+    }
 }

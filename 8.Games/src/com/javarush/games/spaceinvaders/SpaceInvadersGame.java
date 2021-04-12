@@ -81,14 +81,14 @@ public class SpaceInvadersGame extends Game {
 
     private void createStars() {
         stars = new ArrayList<Star>();
-        stars.add(new Star(1, 1));
-        stars.add(new Star(4, 3));
-        stars.add(new Star(1, 6));
-        stars.add(new Star(1, 8));
-        stars.add(new Star(5, 1));
-        stars.add(new Star(4, 3));
-        stars.add(new Star(6, 6));
-        stars.add(new Star(8, 8));
+        stars.add(new Star(30, 31));
+        stars.add(new Star(54, 53));
+        stars.add(new Star(5, 40));
+        stars.add(new Star(25, 20));
+        stars.add(new Star(8, 53));
+        stars.add(new Star(42, 31));
+        stars.add(new Star(20, 26));
+        stars.add(new Star(35, 58));
     }
 
     private void moveSpaceObjects() {
