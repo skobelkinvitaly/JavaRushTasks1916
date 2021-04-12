@@ -3,10 +3,10 @@ package com.javarush.games.snake;
 import com.javarush.engine.cell.*;
 
 public class SnakeGame extends Game {
-    private static final int  GOAL = 28;
+    private static final int GOAL = 28;
     private boolean isGameStopped;
     private Apple apple;
-    private   int turnDelay; //Переменная установки продолжительности хода
+    private int turnDelay; //Переменная установки продолжительности хода
     public static final int WIDTH = 15;
     public static final int HEIGHT = 15;
     private Snake snake;
@@ -17,11 +17,12 @@ public class SnakeGame extends Game {
         setScreenSize(WIDTH, HEIGHT);
         createGame();
     }
+
     //метод выполняет действия для создания игры
-    private void  createGame(){
+    private void createGame() {
         turnDelay = 300;
         setTurnTimer(turnDelay);
-        Snake snakeT = new Snake(WIDTH/2, HEIGHT/2);
+        Snake snakeT = new Snake(WIDTH / 2, HEIGHT / 2);
         snake = snakeT;
 //        Apple apple = new Apple(5,5);//создаем яблоко
         createNewApple();
@@ -29,19 +30,21 @@ public class SnakeGame extends Game {
         drawScene();
 //        apple.draw(this);//отрисовка яблока
     }
+
     //метод выполняет отрисовку экрана
-    private void  drawScene(){
+    private void drawScene() {
         //Окраска ячеек игрового поля
         for (int x = 0; x < WIDTH; x++) {
             for (int y = 0; y < HEIGHT; y++) {
 //                setCellColor(x, y, Color.DARKSEAGREEN);
-                setCellValueEx(x,y,Color.DARKSEAGREEN, "");
+                setCellValueEx(x, y, Color.DARKSEAGREEN, "");
             }
         }
         snake.draw(this); //отрисовка змеи
         apple.draw(this);
     }
-//Всё, что должно происходить в игре на протяжении одного хода, описывается здесь.
+
+    //Всё, что должно происходить в игре на протяжении одного хода, описывается здесь.
 // После передвижения змейки не забудь перерисовать игровое поле.
     @Override
     public void onTurn(int step) {
@@ -61,19 +64,29 @@ public class SnakeGame extends Game {
         if (key == Key.RIGHT) snake.setDirection(Direction.RIGHT);
         if (key == Key.UP) snake.setDirection(Direction.UP);
         if (key == Key.DOWN) snake.setDirection(Direction.DOWN);
+        if (key == Key.SPACE && isGameStopped == true) createGame();
     }
-    private void createNewApple(){
+
+    private void createNewApple() {
         int x = getRandomNumber(WIDTH);
         int y = getRandomNumber(HEIGHT);
-        Apple newApple = new Apple(x, y);
-        apple = newApple;
+        apple = new Apple(x, y);
+        while (true) {
+            int x2 = getRandomNumber(WIDTH);
+            int y2 = getRandomNumber(HEIGHT);
+            if (snake.checkCollision(apple)) apple = new Apple(x2, y2);
+            else break;
+        }
+        ;
     }
-    private void gameOver(){
+
+    private void gameOver() {
         stopTurnTimer();
         isGameStopped = true;
         showMessageDialog(Color.AZURE, "GAME OVER", Color.BLACK, 15);
     }
-    private void win(){
+
+    private void win() {
         stopTurnTimer();
         isGameStopped = true;
         showMessageDialog(Color.GREEN, "YOU WIN!!!", Color.BLANCHEDALMOND, 50);
