@@ -92,7 +92,7 @@ public class SnakeGame extends Game {
     private void gameOver() {
         stopTurnTimer();
         isGameStopped = true;
-        showMessageDialog(Color.AZURE, "GAME OVER", Color.BLACK, 50);
+        showMessageDialog(Color.AZURE, "GAME OVER \n     (>_<)", Color.BLACK, 50);
     }
 
     private void win() {
