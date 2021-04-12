@@ -10,10 +10,16 @@ public class Snake {
 
     //Устанавливает направление
     public void setDirection(Direction direction) {
-if (this.direction == Direction.RIGHT && direction != Direction.LEFT) this.direction = direction;
-if (this.direction == Direction.LEFT && direction != Direction.RIGHT) this.direction = direction;
-if (this.direction == Direction.UP && direction != Direction.DOWN) this.direction = direction;
-if (this.direction == Direction.DOWN && direction != Direction.UP) this.direction = direction;
+//        if (this.direction == Direction.LEFT && (snakeParts.get(0).x != snakeParts.get(1).x))
+//            this.direction = direction;
+        if (this.direction == Direction.RIGHT && direction != Direction.LEFT &&
+                (snakeParts.get(0).x != snakeParts.get(1).x)) this.direction = direction;
+        if (this.direction == Direction.LEFT && direction != Direction.RIGHT &&
+                (snakeParts.get(0).x != snakeParts.get(1).x)) this.direction = direction;
+        if (this.direction == Direction.UP && direction != Direction.DOWN &&
+                (snakeParts.get(0).y != snakeParts.get(1).y)) this.direction = direction;
+        if (this.direction == Direction.DOWN && direction != Direction.UP &&
+                (snakeParts.get(0).y != snakeParts.get(1).y)) this.direction = direction;
     }
 
     public boolean isAlive = true;
@@ -95,10 +101,11 @@ if (this.direction == Direction.DOWN && direction != Direction.UP) this.directio
     public void removeTail() {
         snakeParts.remove(snakeParts.size() - 1);
     }
+
     //Проверка пересечения змейки с собой
-    public boolean checkCollision(GameObject gameObject){
+    public boolean checkCollision(GameObject gameObject) {
         boolean ret = false;
-        for (GameObject gameObjectTemp:snakeParts) {
+        for (GameObject gameObjectTemp : snakeParts) {
             if (gameObject.x == gameObjectTemp.x &&
                     gameObject.y == gameObjectTemp.y) {
                 ret = true;
@@ -107,7 +114,8 @@ if (this.direction == Direction.DOWN && direction != Direction.UP) this.directio
         }
         return ret;
     }
-    public int getLength(){
+
+    public int getLength() {
         return snakeParts.size();
     }
 }
