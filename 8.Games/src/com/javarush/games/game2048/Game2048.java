@@ -21,7 +21,8 @@ public class Game2048 extends Game {
     private void drawScene() {
         for (int x = 0; x < SIDE; x++) {
             for (int y = 0; y < SIDE; y++) {
-                setCellColoredNumber(x,y,gameField[y][x]);
+//                setCellColor(x, y, Color.GREEN);
+                setCellColoredNumber(x, y, gameField[y][x]);
             }
         }
     }
@@ -38,7 +39,8 @@ public class Game2048 extends Game {
             }
         }
     }
-    private  Color getColorByValue(int value){
+
+    private Color getColorByValue(int value) {
         Color color = null;
         if (value == 2) color = Color.DEEPSKYBLUE;
         if (value == 4) color = Color.DEEPPINK;
@@ -53,10 +55,68 @@ public class Game2048 extends Game {
         if (value == 2048) color = Color.YELLOW;
         return color;
     }
-    private void setCellColoredNumber(int x, int y, int value){
+
+    private void setCellColoredNumber(int x, int y, int value) {
         Color color2 = getColorByValue(value);
         String num = "";
-        if (value !=0) num = String.valueOf(value);
-        setCellValueEx(x,y,color2, num);
+        if (value != 0) num = String.valueOf(value);
+        setCellValueEx(x, y, color2, num);
+    }
+
+    private boolean compressRow(int[] row) {
+//        boolean isSorted = false;
+//        boolean returnFlag = false;
+//        int buf;
+//        while (!isSorted) {
+//            isSorted = true;
+//            for (int i = 0; i < row.length - 1; i++) {
+//                if (row[i]<row[i+1]){
+//                    isSorted = false;
+//                    buf = row[i];
+//                    row[i] = row[i+1];
+//                    row[i+1] = buf;
+//                    returnFlag = true;
+//                }
+//            }
+//        }
+//        return returnFlag;
+
+//
+//        boolean isMoved = false;
+//        int size = row.length;
+//        int[] arrCopy = new int[size];
+//        int indexToCopy = 0;
+//        for (int i = 0; i < row.length; i++) {
+//            if (row[i] != 0){
+//                arrCopy[indexToCopy] = row[i];
+//                indexToCopy++;
+//                isMoved = true;
+//            }
+//        }
+//        row = arrCopy;
+//        return isMoved;
+
+        boolean move = false;
+        for(int i = 1; i < row.length; i++){
+            if(row[i] == 0) continue;
+            if(row[i] != 0 && row[i-1] == 0){
+                row[i-1] = row[i];
+                row[i] = 0;
+                move = true;
+                i = 0;
+            }
+        }
+        return move;
+    }
+    private boolean mergeRow(int[] row){
+        boolean isMerged = false;
+        for (int i = 0; i < row.length-1; i++) {
+if (row[i]!=0 && row[i]==row[i+1]) {
+    row[i] = row[i]*2;
+    row[i+1] = 0;
+    isMerged = true;
+}
+        }
+        return isMerged;
     }
 }
