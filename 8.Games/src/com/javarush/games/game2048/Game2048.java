@@ -21,7 +21,6 @@ public class Game2048 extends Game {
     private void drawScene() {
         for (int x = 0; x < SIDE; x++) {
             for (int y = 0; y < SIDE; y++) {
-//                setCellColor(x, y, Color.GREEN);
                 setCellColoredNumber(x, y, gameField[y][x]);
             }
         }
@@ -64,37 +63,6 @@ public class Game2048 extends Game {
     }
 
     private boolean compressRow(int[] row) {
-//        boolean isSorted = false;
-//        boolean returnFlag = false;
-//        int buf;
-//        while (!isSorted) {
-//            isSorted = true;
-//            for (int i = 0; i < row.length - 1; i++) {
-//                if (row[i]<row[i+1]){
-//                    isSorted = false;
-//                    buf = row[i];
-//                    row[i] = row[i+1];
-//                    row[i+1] = buf;
-//                    returnFlag = true;
-//                }
-//            }
-//        }
-//        return returnFlag;
-
-//
-//        boolean isMoved = false;
-//        int size = row.length;
-//        int[] arrCopy = new int[size];
-//        int indexToCopy = 0;
-//        for (int i = 0; i < row.length; i++) {
-//            if (row[i] != 0){
-//                arrCopy[indexToCopy] = row[i];
-//                indexToCopy++;
-//                isMoved = true;
-//            }
-//        }
-//        row = arrCopy;
-//        return isMoved;
 
         boolean move = false;
         for (int i = 1; i < row.length; i++) {
@@ -123,18 +91,41 @@ public class Game2048 extends Game {
 
     @Override
     public void onKeyPress(Key key) {
-//        super.onKeyPress(key);
-        if (key == Key.LEFT) moveLeft();
-        if (key == Key.RIGHT) moveRight();
-        if (key == Key.UP) moveUp();
-        if (key == Key.DOWN) moveDown();
+        if (key == Key.LEFT) {
+            moveLeft();
+            drawScene();
+        }
+        if (key == Key.RIGHT) {
+            moveRight();
+            drawScene();
+        }
+        if (key == Key.UP) {
+            moveUp();
+            drawScene();
+        }
+        if (key == Key.DOWN) {
+            moveDown();
+            drawScene();
+        }
     }
-    private void moveLeft(){
+
+    private void moveLeft() {
+        boolean isMoved = false;
+        for (int i = 0; i < gameField.length; i++) {
+            if (compressRow(gameField[i])) isMoved = true;
+            if (mergeRow(gameField[i])) isMoved = true;
+            if (compressRow(gameField[i])) isMoved = true;
+        }
+        if (isMoved == true) createNewNumber();
+    }
+
+    private void moveRight() {
 
     }
-    private  void moveRight(){
 
+    private void moveUp() {
     }
-    private  void moveUp(){}
-    private void moveDown(){}
+
+    private void moveDown() {
+    }
 }
