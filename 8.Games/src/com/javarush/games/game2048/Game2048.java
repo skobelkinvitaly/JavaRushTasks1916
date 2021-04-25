@@ -128,11 +128,17 @@ public class Game2048 extends Game {
 
     private void moveDown() {
     }
-    private void rotateClockwise(){
+
+    private void rotateClockwise() {
         int[][] gameFieldCopy = new int[SIDE][SIDE];
         for (int i = 0; i < SIDE; i++) {
-            for (int j = SIDE; j >0 ; j--) {
-
+            for (int j = 0; j < SIDE; j++) {
+                gameFieldCopy[i][j] = gameField[3-j][i];
+            }
+        }
+        for (int z = 0; z < SIDE; z++) {
+            for (int w = 0; w < SIDE; w++) {
+                gameField[z][w] = gameFieldCopy[z][w];
             }
         }
     }
