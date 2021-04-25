@@ -2,9 +2,16 @@ package com.javarush.games.moonlander;
 
 public class GameObject {
     public double x,y;
+    public int[][] matrix;
+//
+//    public GameObject(double x, double y) {
+//        this.x = x;
+//        this.y = y;
+//    }
 
-    public GameObject(double x, double y) {
+    public GameObject(double x, double y, int[][] matrix) {
         this.x = x;
         this.y = y;
+        this.matrix = matrix;
     }
 }
