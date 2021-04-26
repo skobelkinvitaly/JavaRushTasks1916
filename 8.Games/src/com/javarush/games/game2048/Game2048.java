@@ -120,20 +120,34 @@ public class Game2048 extends Game {
     }
 
     private void moveRight() {
-
+        rotateClockwise();
+        rotateClockwise();
+        moveLeft();
+        rotateClockwise();
+        rotateClockwise();
     }
 
     private void moveUp() {
+        rotateClockwise();
+        rotateClockwise();
+        rotateClockwise();
+        moveLeft();
+        rotateClockwise();
     }
 
     private void moveDown() {
+        rotateClockwise();
+        moveLeft();
+        rotateClockwise();
+        rotateClockwise();
+        rotateClockwise();
     }
 
     private void rotateClockwise() {
         int[][] gameFieldCopy = new int[SIDE][SIDE];
         for (int i = 0; i < SIDE; i++) {
             for (int j = 0; j < SIDE; j++) {
-                gameFieldCopy[i][j] = gameField[3-j][i];
+                gameFieldCopy[i][j] = gameField[3 - j][i];
             }
         }
         for (int z = 0; z < SIDE; z++) {
