@@ -3,6 +3,7 @@ package com.javarush.games.game2048;
 import com.javarush.engine.cell.*;
 
 public class Game2048 extends Game {
+    private boolean isGameStopped = false;
     private static final int SIDE = 4;
     private int[][] gameField = new int[SIDE][SIDE];
 
@@ -37,6 +38,8 @@ public class Game2048 extends Game {
                 break;
             }
         }
+        int num = getMaxTileValue();
+        if (num == 2048) win();
     }
 
     private Color getColorByValue(int value) {
@@ -155,5 +158,20 @@ public class Game2048 extends Game {
                 gameField[z][w] = gameFieldCopy[z][w];
             }
         }
+    }
+
+    private int getMaxTileValue() {
+        int max = 0;
+        for (int i = 0; i < SIDE; i++) {
+            for (int j = 0; j < SIDE; j++) {
+                if (gameField[i][j] > max) max = gameField[i][j];
+            }
+        }
+        return max;
+    }
+
+    private void win() {
+        isGameStopped = true;
+        showMessageDialog(Color.GREEN, "You win!", Color.BLACK, 50);
     }
 }
