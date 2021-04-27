@@ -174,4 +174,18 @@ public class Game2048 extends Game {
         isGameStopped = true;
         showMessageDialog(Color.GREEN, "You win!", Color.BLACK, 50);
     }
+
+    private boolean canUserMove() {
+        boolean canMove = false;
+        for (int x = 0; x < SIDE; x++) {
+            for (int y = 0; y < SIDE; y++) {
+                if (gameField[y][x] == 0) canMove = true;
+                if (y>=1 && gameField[y][x] == gameField[y-1][x]) canMove = true;
+                if (x < SIDE-1 && gameField[y][x] == gameField[y][x+1]) canMove = true;
+                if (y < SIDE-1 && gameField[y][x] == gameField[y+1][x]) canMove = true;
+                if (x>=1 && gameField[y][x] == gameField[y][x-1]) canMove = true;
+            }
+        }
+        return canMove;
+    }
 }
