@@ -94,21 +94,25 @@ public class Game2048 extends Game {
 
     @Override
     public void onKeyPress(Key key) {
-        if (key == Key.LEFT) {
-            moveLeft();
-            drawScene();
-        }
-        if (key == Key.RIGHT) {
-            moveRight();
-            drawScene();
-        }
-        if (key == Key.UP) {
-            moveUp();
-            drawScene();
-        }
-        if (key == Key.DOWN) {
-            moveDown();
-            drawScene();
+        if (canUserMove() == false) {
+            gameOver();
+        }else{
+            if (key == Key.LEFT) {
+                moveLeft();
+                drawScene();
+            }
+            if (key == Key.RIGHT) {
+                moveRight();
+                drawScene();
+            }
+            if (key == Key.UP) {
+                moveUp();
+                drawScene();
+            }
+            if (key == Key.DOWN) {
+                moveDown();
+                drawScene();
+            }
         }
     }
 
@@ -187,5 +191,9 @@ public class Game2048 extends Game {
             }
         }
         return canMove;
+    }
+    private void gameOver(){
+        isGameStopped = true;
+        showMessageDialog(Color.RED,"You lose!", Color.BLACK, 25);
     }
 }
