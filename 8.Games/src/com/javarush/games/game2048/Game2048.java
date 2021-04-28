@@ -3,6 +3,7 @@ package com.javarush.games.game2048;
 import com.javarush.engine.cell.*;
 
 public class Game2048 extends Game {
+    private int score;
     private boolean isGameStopped = false;
     private static final int SIDE = 4;
     private int[][] gameField = new int[SIDE][SIDE];
@@ -88,6 +89,8 @@ public class Game2048 extends Game {
         for (int i = 0; i < row.length - 1; i++) {
             if (row[i] != 0 && row[i] == row[i + 1]) {
                 row[i] = row[i] * 2;
+                score = score + row[i];
+                setScore(score);
                 row[i + 1] = 0;
                 isMerged = true;
             }
@@ -101,6 +104,10 @@ public class Game2048 extends Game {
             if (key == Key.SPACE) isGameStopped = false;
             if (key == Key.SPACE) createGame();
             if (key == Key.SPACE) drawScene();
+            if (key == Key.SPACE) {
+                score = 0;
+                setScore(score);
+            }
         } else {
             if (canUserMove() == false) {
                 gameOver();
