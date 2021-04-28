@@ -15,6 +15,9 @@ public class Game2048 extends Game {
     }
 
     private void createGame() {
+//        if (isGameStopped == true){
+//        }
+        gameField = new int[SIDE][SIDE];
         createNewNumber();
         createNewNumber();
     }
@@ -94,27 +97,35 @@ public class Game2048 extends Game {
 
     @Override
     public void onKeyPress(Key key) {
-        if (canUserMove() == false) {
-            gameOver();
-        }else{
-            if (key == Key.LEFT) {
-                moveLeft();
-                drawScene();
-            }
-            if (key == Key.RIGHT) {
-                moveRight();
-                drawScene();
-            }
-            if (key == Key.UP) {
-                moveUp();
-                drawScene();
-            }
-            if (key == Key.DOWN) {
-                moveDown();
-                drawScene();
+        if (isGameStopped == true) {
+            if (key == Key.SPACE) isGameStopped = false;
+            if (key == Key.SPACE) createGame();
+            if (key == Key.SPACE) drawScene();
+        } else {
+            if (canUserMove() == false) {
+                gameOver();
+            } else {
+                if (key == Key.LEFT) {
+                    moveLeft();
+                    drawScene();
+                }
+                if (key == Key.RIGHT) {
+                    moveRight();
+                    drawScene();
+                }
+                if (key == Key.UP) {
+                    moveUp();
+                    drawScene();
+                }
+                if (key == Key.DOWN) {
+                    moveDown();
+                    drawScene();
+                }
             }
         }
     }
+//    }
+//    }
 
     private void moveLeft() {
         boolean isMoved = false;
@@ -184,16 +195,17 @@ public class Game2048 extends Game {
         for (int x = 0; x < SIDE; x++) {
             for (int y = 0; y < SIDE; y++) {
                 if (gameField[y][x] == 0) canMove = true;
-                if (y>=1 && gameField[y][x] == gameField[y-1][x]) canMove = true;
-                if (x < SIDE-1 && gameField[y][x] == gameField[y][x+1]) canMove = true;
-                if (y < SIDE-1 && gameField[y][x] == gameField[y+1][x]) canMove = true;
-                if (x>=1 && gameField[y][x] == gameField[y][x-1]) canMove = true;
+                if (y >= 1 && gameField[y][x] == gameField[y - 1][x]) canMove = true;
+                if (x < SIDE - 1 && gameField[y][x] == gameField[y][x + 1]) canMove = true;
+                if (y < SIDE - 1 && gameField[y][x] == gameField[y + 1][x]) canMove = true;
+                if (x >= 1 && gameField[y][x] == gameField[y][x - 1]) canMove = true;
             }
         }
         return canMove;
     }
-    private void gameOver(){
+
+    private void gameOver() {
         isGameStopped = true;
-        showMessageDialog(Color.RED,"You lose!", Color.BLACK, 25);
+        showMessageDialog(Color.RED, "You lose!", Color.BLACK, 25);
     }
 }
