@@ -49,6 +49,7 @@ public class Game2048 extends Game {
     private Color getColorByValue(int value) {
         Color color = null;
         if (value == 2) color = Color.DEEPSKYBLUE;
+        if (value == 0) color = Color.RED;
         if (value == 4) color = Color.DEEPPINK;
         if (value == 8) color = Color.DIMGRAY;
         if (value == 16) color = Color.YELLOWGREEN;
