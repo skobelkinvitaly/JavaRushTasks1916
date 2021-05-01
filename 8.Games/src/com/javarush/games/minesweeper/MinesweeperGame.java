@@ -70,26 +70,32 @@ public class MinesweeperGame extends Game {
     }
 
     private void openTile(int x, int y) {
-//        for (int y2 = 0; y2 < SIDE; y2++) {
-//            for (int x2 = 0; x2 < SIDE; x2++) {
-//                if (gameField[y2][x2].isMine) {
-//                    setCellValue(x2, y2, MINE);
-//                } else {
-//                    setCellNumber(x2, y2, gameField[y2][x2].countMineNeighbors);
-//                }
-//                gameField[y2][x2].isOpen = true;
-//                setCellColor(x2, y2, Color.GREEN);
-//            }
-//        }
-        if (gameField[y][x].isMine) setCellValue(x, y, MINE);
-        else setCellNumber(x, y, gameField[y][x].countMineNeighbors);
+        int count = gameField[y][x].countMineNeighbors;
         gameField[y][x].isOpen = true;
         setCellColor(x, y, Color.GREEN);
+        if (gameField[y][x].isMine && count != 0) {
+//            setCellValue(x, y, MINE);
+        }
+        if (!gameField[y][x].isMine && count != 0) {
+            setCellNumber(x, y, gameField[y][x].countMineNeighbors);
+        }
+        if (!gameField[y][x].isMine && count == 0) {
+            List<GameObject> neighbors = getNeighbors(gameField[y][x]);
+            setCellValue(x, y, "");
+//            if(gameField[y][x].isOpen == false) openTile(x,y);
+            for (int i = 0; i < neighbors.size(); i++) {
+                if (neighbors.get(i).isOpen == false) openTile(neighbors.get(i).x, neighbors.get(i).y);
+            }
+        }
+//        if (!gameField[y][x].isMine && count == 0 && gameField[y][x].isOpen == false) {
+////            getNeighbors(gameField[y][x]);
+////            setCellValue(x, y, "");
+//            openTile(x,y);
+//        }
     }
 
     @Override
     public void onMouseLeftClick(int x, int y) {
-//        super.onMouseLeftClick(x, y);
         openTile(x, y);
     }
 }
