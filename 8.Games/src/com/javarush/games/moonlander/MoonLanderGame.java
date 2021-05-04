@@ -5,9 +5,10 @@ import javafx.scene.transform.MatrixType;
 
 public class MoonLanderGame extends Game {
     private GameObject landscape;
-    private  Rocket rocket;
-    public static final int  WIDTH = 64;
-    public static final int  HEIGHT = 64;
+    private Rocket rocket;
+    public static final int WIDTH = 64;
+    public static final int HEIGHT = 64;
+
     @Override
     public void initialize() {
 //        super.initialize();
@@ -15,23 +16,40 @@ public class MoonLanderGame extends Game {
         setScreenSize(WIDTH, HEIGHT);
         createGame();
     }
-    private void createGame(){
 
+    private void createGame() {
+        setTurnTimer(50);
 //        rocket = new Rocket(WIDTH/2, 0);
         createGameObjects();
         drawScene();
     }
-    private void drawScene(){
+
+    private void drawScene() {
         for (int i = 0; i < WIDTH; i++) {
             for (int j = 0; j < HEIGHT; j++) {
-                setCellColor(i,j,Color.BLUE);
+                setCellColor(i, j, Color.BLUE);
             }
         }
         landscape.draw(this);
         rocket.draw(this);
     }
-    private void createGameObjects(){
-        rocket = new Rocket(WIDTH/2, 0);
+
+    private void createGameObjects() {
+        rocket = new Rocket(WIDTH / 2, 0);
         landscape = new GameObject(0, 25, ShapeMatrix.LANDSCAPE);
+    }
+
+    @Override
+    public void onTurn(int step) {
+//        super.onTurn(step);
+        rocket.move();
+        drawScene();
+    }
+
+    @Override
+    public void setCellColor(int x, int y, Color color) {
+        if (x <= 0 | x >= WIDTH | y <= 0 | y >= HEIGHT) {
+
+        } else super.setCellColor(x, y, color);
     }
 }
