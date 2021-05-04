@@ -98,4 +98,28 @@ public class MinesweeperGame extends Game {
     public void onMouseLeftClick(int x, int y) {
         openTile(x, y);
     }
+
+    private void markTile(int x, int y) {
+        if (gameField[y][x].isOpen == false && countFlags != 0 && gameField[y][x].isFlag == false) {
+            gameField[y][x].isFlag = true;
+            countFlags = countFlags - 1;
+            setCellValue(x, y, FLAG);
+            setCellColor(x, y, Color.YELLOW);
+        } else if (gameField[y][x].isOpen == false && gameField[y][x].isFlag == true){
+//            if (gameField[y][x].isFlag == false) {
+            gameField[y][x].isFlag = false;
+            countFlags++;
+            setCellValue(x, y, "");
+            setCellColor(x, y, Color.ORANGE);
+//            }
+//            if (gameField[y][x].isFlag == true) {
+//            }
+        }
+    }
+
+    @Override
+    public void onMouseRightClick(int x, int y) {
+//        super.onMouseRightClick(x, y);
+        markTile(x, y);
+    }
 }
