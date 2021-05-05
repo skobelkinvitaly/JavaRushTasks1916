@@ -1,9 +1,11 @@
 package com.javarush.games.moonlander;
 
 import com.javarush.engine.cell.*;
-import javafx.scene.transform.MatrixType;
 
 public class MoonLanderGame extends Game {
+    private boolean isUpPressed;
+    private boolean isLeftPressed;
+    private boolean isRightPressed;
     private GameObject landscape;
     private Rocket rocket;
     public static final int WIDTH = 64;
@@ -18,6 +20,9 @@ public class MoonLanderGame extends Game {
     }
 
     private void createGame() {
+        isUpPressed = false;
+        isLeftPressed = false;
+        isRightPressed = false;
         setTurnTimer(50);
 //        rocket = new Rocket(WIDTH/2, 0);
         createGameObjects();
@@ -42,7 +47,7 @@ public class MoonLanderGame extends Game {
     @Override
     public void onTurn(int step) {
 //        super.onTurn(step);
-        rocket.move();
+        rocket.move(isUpPressed, isLeftPressed, isRightPressed);
         drawScene();
     }
 
@@ -51,5 +56,27 @@ public class MoonLanderGame extends Game {
         if (x <= 0 | x >= WIDTH | y <= 0 | y >= HEIGHT) {
 
         } else super.setCellColor(x, y, color);
+    }
+
+    @Override
+    public void onKeyPress(Key key) {
+//        super.onKeyPress(key);
+        if (key == Key.UP) isUpPressed = true;
+        if (key == Key.LEFT) {
+            isLeftPressed = true;
+            isRightPressed = false;
+        }
+        if (key == Key.RIGHT) {
+            isLeftPressed = false;
+            isRightPressed = true;
+        }
+    }
+
+    @Override
+    public void onKeyReleased(Key key) {
+//        super.onKeyReleased(key);
+        if (key == Key.UP) isUpPressed = false;
+        if (key == Key.RIGHT) isRightPressed = false;
+        if (key == Key.LEFT) isLeftPressed = false;
     }
 }
