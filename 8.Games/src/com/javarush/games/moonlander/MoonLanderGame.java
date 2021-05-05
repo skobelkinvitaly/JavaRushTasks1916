@@ -3,6 +3,7 @@ package com.javarush.games.moonlander;
 import com.javarush.engine.cell.*;
 
 public class MoonLanderGame extends Game {
+    private GameObject platform;
     private boolean isUpPressed;
     private boolean isLeftPressed;
     private boolean isRightPressed;
@@ -20,6 +21,7 @@ public class MoonLanderGame extends Game {
     }
 
     private void createGame() {
+
         isUpPressed = false;
         isLeftPressed = false;
         isRightPressed = false;
@@ -42,12 +44,14 @@ public class MoonLanderGame extends Game {
     private void createGameObjects() {
         rocket = new Rocket(WIDTH / 2, 0);
         landscape = new GameObject(0, 25, ShapeMatrix.LANDSCAPE);
+        platform = new GameObject(23, MoonLanderGame.HEIGHT-1,ShapeMatrix.PLATFORM);
     }
 
     @Override
     public void onTurn(int step) {
 //        super.onTurn(step);
         rocket.move(isUpPressed, isLeftPressed, isRightPressed);
+        check();
         drawScene();
     }
 
@@ -79,4 +83,14 @@ public class MoonLanderGame extends Game {
         if (key == Key.RIGHT) isRightPressed = false;
         if (key == Key.LEFT) isLeftPressed = false;
     }
+    private  void check(){
+        if(rocket.isCollision(landscape) == true || rocket.isCollision(platform) == false &&
+                rocket.isStopped() ==true) gameOver();
+        if(rocket.isCollision(platform) == true &&
+                rocket.isStopped() ==true) win();
+
+    }
+    private void win(){}
+    private void gameOver(){}
+
 }
