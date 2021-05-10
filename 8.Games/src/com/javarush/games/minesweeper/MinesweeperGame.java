@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MinesweeperGame extends Game {
+    private int countClosedTiles = SIDE * SIDE;
     private boolean isGameStopped;
     private int countFlags;
     private static final String FLAG = "\uD83D\uDEA9";
@@ -72,11 +73,12 @@ public class MinesweeperGame extends Game {
     }
 
     private void openTile(int x, int y) {
-        if (gameField[y][x].isOpen == true || gameField[y][x].isFlag == true || isGameStopped == true){
+        if (gameField[y][x].isOpen == true || gameField[y][x].isFlag == true || isGameStopped == true) {
 
-        }else{
+        } else {
             int count = gameField[y][x].countMineNeighbors;
             gameField[y][x].isOpen = true;
+            countClosedTiles--;
             setCellColor(x, y, Color.GREEN);
             if (gameField[y][x].isMine && count != 0) {
             }
@@ -94,6 +96,7 @@ public class MinesweeperGame extends Game {
                 setCellValueEx(x, y, Color.RED, MINE);
                 gameOver();
             }
+            if (countClosedTiles == countMinesOnField && gameField[y][x].isMine == false) win();
         }
     }
 
@@ -104,13 +107,13 @@ public class MinesweeperGame extends Game {
 
     private void markTile(int x, int y) {
         if (isGameStopped == true) {
-        }else {
+        } else {
             if (gameField[y][x].isOpen == false && countFlags != 0 && gameField[y][x].isFlag == false) {
                 gameField[y][x].isFlag = true;
                 countFlags = countFlags - 1;
                 setCellValue(x, y, FLAG);
                 setCellColor(x, y, Color.YELLOW);
-            } else if (gameField[y][x].isOpen == false && gameField[y][x].isFlag == true){
+            } else if (gameField[y][x].isOpen == false && gameField[y][x].isFlag == true) {
                 gameField[y][x].isFlag = false;
                 countFlags++;
                 setCellValue(x, y, "");
@@ -121,13 +124,18 @@ public class MinesweeperGame extends Game {
 
     @Override
     public void onMouseRightClick(int x, int y) {
-//        super.onMouseRightClick(x, y);
         markTile(x, y);
     }
-    private void gameOver(){
+
+    private void gameOver() {
         isGameStopped = true;
         showMessageDialog(Color.RED, "Game over!", Color.BLACK, 50);
 
 
+    }
+
+    private void win() {
+        isGameStopped = true;
+        showMessageDialog(Color.YELLOW, "Win!", Color.BLACK, 50);
     }
 }

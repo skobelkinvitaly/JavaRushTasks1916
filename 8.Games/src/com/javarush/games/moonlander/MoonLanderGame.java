@@ -3,6 +3,7 @@ package com.javarush.games.moonlander;
 import com.javarush.engine.cell.*;
 
 public class MoonLanderGame extends Game {
+    private int score;
     private boolean isGameStopped;
     private GameObject platform;
     private boolean isUpPressed;
@@ -15,19 +16,18 @@ public class MoonLanderGame extends Game {
 
     @Override
     public void initialize() {
-//        super.initialize();
         showGrid(false);
         setScreenSize(WIDTH, HEIGHT);
         createGame();
     }
 
     private void createGame() {
+        score = 1000;
         isGameStopped = false;
         isUpPressed = false;
         isLeftPressed = false;
         isRightPressed = false;
         setTurnTimer(50);
-//        rocket = new Rocket(WIDTH/2, 0);
         createGameObjects();
         drawScene();
     }
@@ -43,16 +43,17 @@ public class MoonLanderGame extends Game {
     }
 
     private void createGameObjects() {
-        rocket = new Rocket(WIDTH / 2, 0);
+        rocket = new Rocket(WIDTH / 2, 2);
         landscape = new GameObject(0, 25, ShapeMatrix.LANDSCAPE);
         platform = new GameObject(23, MoonLanderGame.HEIGHT - 1, ShapeMatrix.PLATFORM);
     }
 
     @Override
     public void onTurn(int step) {
-//        super.onTurn(step);
+        if (score > 0) score = score - 1;
         rocket.move(isUpPressed, isLeftPressed, isRightPressed);
         check();
+        setScore(score);
         drawScene();
     }
 
@@ -65,7 +66,6 @@ public class MoonLanderGame extends Game {
 
     @Override
     public void onKeyPress(Key key) {
-//        super.onKeyPress(key);
         if (key == Key.UP) isUpPressed = true;
         if (key == Key.LEFT) {
             isLeftPressed = true;
@@ -80,7 +80,6 @@ public class MoonLanderGame extends Game {
 
     @Override
     public void onKeyReleased(Key key) {
-//        super.onKeyReleased(key);
         if (key == Key.UP) isUpPressed = false;
         if (key == Key.RIGHT) isRightPressed = false;
         if (key == Key.LEFT) isLeftPressed = false;
@@ -106,7 +105,7 @@ public class MoonLanderGame extends Game {
         isGameStopped = true;
         showMessageDialog(Color.BLUE, "CRASH!", Color.BLACK, 50);
         stopTurnTimer();
-
+        score = 0;
     }
 
 }
