@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MinesweeperGame extends Game {
+    private int score;
     private int countClosedTiles = SIDE * SIDE;
     private boolean isGameStopped;
     private int countFlags;
@@ -23,7 +24,6 @@ public class MinesweeperGame extends Game {
     }
 
     private void createGame() {
-        isGameStopped = false;
         for (int y = 0; y < SIDE; y++) {
             for (int x = 0; x < SIDE; x++) {
                 boolean isMine = getRandomNumber(10) < 1;
@@ -32,6 +32,7 @@ public class MinesweeperGame extends Game {
                 }
                 gameField[y][x] = new GameObject(x, y, isMine);
                 setCellColor(x, y, Color.ORANGE);
+                setCellValue(x, y, "");
             }
         }
         countMineNeighbors();
@@ -97,12 +98,18 @@ public class MinesweeperGame extends Game {
                 gameOver();
             }
             if (countClosedTiles == countMinesOnField && gameField[y][x].isMine == false) win();
+            if (gameField[y][x].isMine == false && gameField[y][x].isOpen == true) {
+                score = score + 5;
+                setScore(score);
+            }
         }
     }
 
     @Override
     public void onMouseLeftClick(int x, int y) {
-        openTile(x, y);
+        if (isGameStopped == true) {
+            restart();
+        } else openTile(x, y);
     }
 
     private void markTile(int x, int y) {
@@ -137,5 +144,19 @@ public class MinesweeperGame extends Game {
     private void win() {
         isGameStopped = true;
         showMessageDialog(Color.YELLOW, "Win!", Color.BLACK, 50);
+    }
+
+    private void restart() {
+        isGameStopped = false;
+        countClosedTiles = SIDE * SIDE;
+        score = 0;
+        countMinesOnField = 0;
+        setScore(score);
+        createGame();
+//        for (int i = 0; i < SIDE; i++) {
+//            for (int j = 0; j < SIDE; j++) {
+//                setCellValue(j, i, "");
+//            }
+//        }
     }
 }
