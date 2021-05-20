@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Human {
+public class Human implements Alive{
     private List<Human> children = new ArrayList<>();
     public static int nextId = 0;
     private int id;
     protected int age;
     protected String name;
-    protected int course;
+//    protected int course;
 
     protected int[] size;
 
@@ -60,10 +60,10 @@ public class Human {
     public void setName(String name) {
         this.name = name;
     }
-
-    public int getCourse() {
-        return course;
-    }
+//
+//    public int getCourse() {
+//        return course;
+//    }
 
 
 
