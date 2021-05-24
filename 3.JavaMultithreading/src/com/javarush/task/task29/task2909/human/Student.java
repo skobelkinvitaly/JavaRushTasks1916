@@ -12,6 +12,12 @@ public class Student extends UniversityPerson {
     private Date endOfSession;
     private int course;
 
+    @Override
+    public String getPosition() {
+//        return super.getPosition();
+        return "Студент";
+    }
+
     public Student(String name, int age, double averageGrade) {
         super(name, age);
         this.name = name;
@@ -45,10 +51,10 @@ public class Student extends UniversityPerson {
 //    public void setUniversity(String university) {
 //        this.university = university;
 //    }
-
-    public void printData() {
-        System.out.println("Студент: " + name);
-    }
+//
+//    public void printData() {
+//        System.out.println("Студент: " + name);
+//    }
 
     public void incAverageGradeBy01() {
         averageGrade += 0.1;

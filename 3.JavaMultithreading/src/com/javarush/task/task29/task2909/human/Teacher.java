@@ -8,6 +8,12 @@ public class Teacher extends UniversityPerson {
     private int numberOfStudents;
 //    private String university;
 
+    @Override
+    public String getPosition() {
+//        return super.getPosition();
+        return "Преподаватель";
+    }
+
     public Teacher(String name, int age, int numberOfStudents) {
         super(name, age);
         this.name = name;
@@ -38,7 +44,7 @@ public class Teacher extends UniversityPerson {
 //        this.university = university;
 //    }
 
-    public void printData() {
-        System.out.println("Преподаватель: " + name);
-    }
+//    public void printData() {
+//        System.out.println("Преподаватель: " + name);
+//    }
 }
