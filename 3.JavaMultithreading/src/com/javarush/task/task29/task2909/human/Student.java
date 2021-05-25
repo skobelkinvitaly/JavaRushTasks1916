@@ -5,9 +5,9 @@ import java.util.Date;
 import java.util.List;
 
 public class Student extends UniversityPerson {
-//    private List<Human> children = new ArrayList<>();
+    //    private List<Human> children = new ArrayList<>();
     private double averageGrade;
-//    private String university;
+    //    private String university;
     private Date beginningOfSession;
     private Date endOfSession;
     private int course;
@@ -64,15 +64,22 @@ public class Student extends UniversityPerson {
         averageGrade += 0.2;
     }
 
-    public void setValue(String name, double value) {
-        if (name.equals("averageGrade")) {
-            averageGrade = value;
-            return;
-        }
-        if (name.equals("course")) {
-            course = (int) value;
-            return;
-        }
+    //    public void setValue(String name, double value) {
+//        if (name.equals("averageGrade")) {
+//            averageGrade = value;
+//            return;
+//        }
+//        if (name.equals("course")) {
+//            course = (int) value;
+//            return;
+//        }
+//    }
+    public void setCourse(int num) {
+        this.course = num;
+    }
+
+    public void setAverageGrade(double grade) {
+        this.averageGrade = grade;
     }
 
     public void setBeginningOfSession(int day, int month, int year) {
