@@ -64,7 +64,8 @@ public class Student extends UniversityPerson {
 //        averageGrade += 0.2;
 //    }
     public  void incAverageGrade(double delta){
-        averageGrade += delta;
+//        averageGrade += delta;
+        setAverageGrade(getAverageGrade() + delta);
     }
 
     //    public void setValue(String name, double value) {
