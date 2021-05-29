@@ -6,4 +6,10 @@ public class Truck extends Car{
 //        super(type, numberOfPassengers);
 //        create(TRUCK, numberOfPassengers);
     }
+
+    @Override
+    public int getMaxSpeed() {
+//        return super.getMaxSpeed();
+        return 80;
+    }
 }
